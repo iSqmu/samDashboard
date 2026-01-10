@@ -8,10 +8,9 @@ import {
   RiNextjsFill,
   RiSupabaseLine,
 } from 'react-icons/ri';
-import { useEffect, useMemo, useRef } from 'react';
+import { useGSAP } from '@gsap/react'
+import { useEffect, useRef } from 'react';
 import { TbBrandFramerMotion, TbBrandTypescript } from 'react-icons/tb';
-import { motion } from 'framer-motion';
-import _ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
@@ -29,7 +28,7 @@ export default function Home() {
     { Icon: TbBrandTypescript, label: 'TypeScript' },
   ];
 
-  useEffect(() => {
+  useGSAP(() => {
     const tl = gsap.timeline({
       defaults: { ease: 'power2.out', duration: 0.5 },
     });
@@ -44,14 +43,14 @@ export default function Home() {
     tl.from(
       '.stack-icon',
       {
+        y: 30,
         opacity: 0,
-        scale: 1.1,
-        duration: 1,
-        stagger: 0.15, // ← uno por uno
-        ease: 'back.out(1.8)',
+        duration: 0.5,
+        stagger: 0.12,
+        ease: 'power2',
       },
       '-=0.5'
-    ); // solapa con el título
+    );
   }, []);
 
   return (
@@ -88,14 +87,14 @@ export default function Home() {
       <div
         id="3"
         ref={sect3}
-        className="h-1/2 bg-secondary text-primary m-5 py-2 px-6 rounded-lg"
+        className="h-1/2 bg-tertiary overflow-hidden text-primary m-5 py-2 px-6 rounded-lg"
       >
         <h2 className="text-center text-xl font-bold">STACKS</h2>
         <div ref={iconsRef} className="flex justify-center text-2xl gap-5">
           {icons.map(({ Icon, label }, index) => (
             <span
               key={index}
-              className="stack-icon inline-block scale-90 hover:scale-125 transition-transform duration-300 cursor-pointer"
+              className="stack-icon inline-block scale-90 hover:scale-130 transition-transform duration-300 cursor-pointer"
               title={label}
             >
               <Icon />

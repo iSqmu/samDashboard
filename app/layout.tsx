@@ -1,5 +1,5 @@
-import Header from '@/components/global/Header';
-import Footer from '@/components/global/Footer';
+import Header from '@/components/ui/Header';
+import Footer from '@/components/ui/Footer';
 import '@/styles/globals.css';
 export default function RootLayout({
   children,
