@@ -24,7 +24,7 @@ export default function useUserProfile() {
         const meta = user.user_metadata as GoogleUserMetadata;
         setProfile({
           nombre: meta.full_name || user.email?.split('@')[0] || 'Unknown',
-          foto: meta.picture || '/default-avatar.png',
+          foto: meta.picture || '/default-avatar.jpg',
           email: user.email ?? undefined,
         });
       } else {

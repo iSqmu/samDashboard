@@ -1,4 +1,7 @@
 import GoogleLoginButton from '@/components/ui/GoogleLoginButton';
+export const metadata = {
+  title: 'Login',
+};
 
 const page = () => {
   return (

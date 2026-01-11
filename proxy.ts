@@ -1,4 +1,3 @@
-// proxy.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
@@ -24,7 +23,6 @@ export async function proxy(request: NextRequest) {
     }
   );
 
-  // Refresca y obtiene la sesión (mantiene el login activo)
   const {
     data: { session },
   } = await supabase.auth.getSession();
