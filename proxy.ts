@@ -29,7 +29,7 @@ export async function proxy(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
-  const protectedPaths = ['/dashboard', '/tasks', '/profile'];
+  const protectedPaths = ['/dashboard', '/tasks', '/settings', '/assistant'];
 
   const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
 
@@ -45,5 +45,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/tasks/:path*', '/profile/:path*', '/auth'],
+  matcher: ['/dashboard/:path*', '/tasks/:path*', '/assistant/:path*', '/settings/:path*', '/auth'],
 };

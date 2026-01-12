@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Dashboard'
-}
+  title: 'Dashboard',
+};
 
 const page = () => {
   return <div>Dashboard</div>;

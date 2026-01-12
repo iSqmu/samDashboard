@@ -35,7 +35,7 @@ function Header() {
   }, []);
 
   return (
-    <nav className="header z-100 w-full flex justify-between place-items-center py-4 px-6 font-black ">
+    <nav className="header z-10 w-full flex justify-between place-items-center py-4 px-6 font-black ">
       <div className="nav-logo text-2xl">
         <Link href="/">SD</Link>
       </div>

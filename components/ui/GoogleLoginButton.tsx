@@ -2,10 +2,9 @@
 
 import { supabaseClient } from '@/lib/supabase/client';
 import { FaGoogle } from 'react-icons/fa';
-import useSignInWithGoogle from '@/hooks/useSignInWithGoogle'
+import useSignInWithGoogle from '@/hooks/useSignInWithGoogle';
 
 const GoogleLoginButton = () => {
-    
   return (
     <button
       onClick={useSignInWithGoogle}
