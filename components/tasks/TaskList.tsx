@@ -1,7 +1,7 @@
 'use client';
 
 import type { Task } from '@/types/database.types';
-import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { useTaskActions } from '@/hooks/useTaskActions';
 import { FaTrash } from 'react-icons/fa';
@@ -21,9 +21,8 @@ export default function TaskList({ initialTasks }: { initialTasks: Task[] }) {
             .map((task) => (
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, ease: 'easeIn' }}
-                exit={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, ease: easeInOut }}
                 key={task.id}
                 className="flex justify-between items-center p-4 bg-white relative text-dark rounded-lg shadow cursor-pointer hover:[&_.info]:opacity-100"
               >
@@ -55,12 +54,17 @@ export default function TaskList({ initialTasks }: { initialTasks: Task[] }) {
                             : 'text-red-700'
                         )}
                       >
+                        {' '}
                         {task.priority === 'low'
                           ? 'Baja'
                           : task.priority === 'medium'
                           ? 'Media'
                           : 'Alta'}
                       </span>
+                    </p>
+                    <p>
+                      <span className="font-bold">Creado:</span>
+                      <span> {task.created_at?.split('T')[0]}</span>
                     </p>
                   </div>
 
@@ -104,9 +108,8 @@ export default function TaskList({ initialTasks }: { initialTasks: Task[] }) {
             .map((task) => (
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, ease: 'easeIn' }}
-                exit={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, ease: easeInOut }}
                 onClick={() => toggleComplete(task.id, task.completed)}
                 key={task.id}
                 className="flex justify-between items-center p-4 bg-white relative text-dark rounded-lg shadow cursor-pointer hover:[&_.info]:opacity-100"
@@ -135,12 +138,17 @@ export default function TaskList({ initialTasks }: { initialTasks: Task[] }) {
                           : 'text-red-700'
                       )}
                     >
+                      {' '}
                       {task.priority === 'low'
                         ? 'Baja'
                         : task.priority === 'medium'
                         ? 'Media'
                         : 'Alta'}
                     </span>
+                  </p>
+                  <p>
+                    <span className="font-bold">Creado:</span>
+                    <span>{task.created_at?.split('T')[0]}</span>
                   </p>
                 </div>
 
