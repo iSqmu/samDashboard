@@ -77,9 +77,12 @@ const Avatar = () => {
                 >
                   Cerrar Sesión
                 </button>
-                <button className="p-3 text-primary cursor-pointer transition-all duration-300 hover:bg-primary hover:text-gray-700">
-                  Configuración
-                </button>
+                <Link
+                  href="/dashboard"
+                  className="p-3 text-primary text-center cursor-pointer transition-all duration-300 hover:bg-tertiary hover:text-primary"
+                >
+                  Dashboard
+                </Link>
               </motion.div>
             </div>
           </motion.div>

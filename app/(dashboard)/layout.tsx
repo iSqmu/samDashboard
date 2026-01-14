@@ -4,7 +4,7 @@ const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
       <Sidebar />
-      <div>{children}</div>
+      <div className=" flex-1 w-full h-screen">{children}</div>
     </>
   );
 };

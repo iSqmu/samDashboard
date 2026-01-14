@@ -1,7 +1,34 @@
-import React from 'react';
+import TaskList from '@/components/tasks/TaskList';
+import Search from '@/components/tasks/Search';
+import NewTaskClient from '@/components/tasks/NewTask';
+import { getTasks, searchTask } from '@/actions/tasks';
+import { headers } from 'next/headers';
 
-const page = () => {
-  return <div>Tasks</div>;
-};
+export default async function TasksPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
 
-export default page;
+  const searchTerm = typeof params.search === 'string' ? params.search : '';
+
+  console.log(`${searchTerm} -> param`);
+  const tasks = searchTerm ? await searchTask(searchTerm) : await getTasks();
+
+  return (
+    <div className="w-full h-full p-6">
+      <div className="flex justify-between items-center mb-8">
+        <Search placeholder="Buscar tarea..." />
+        <NewTaskClient />
+      </div>
+      {tasks.length === 0 ? (
+        <p>
+          No se encontraron tareas con el término de búsqueda: '{searchTerm}'
+        </p>
+      ) : (
+        <TaskList initialTasks={tasks} />
+      )}
+    </div>
+  );
+}

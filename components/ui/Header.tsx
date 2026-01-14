@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { supabaseClient } from '@/lib/supabase/client';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa6';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 import '@/styles/component.header.css';
 import { User } from '@supabase/supabase-js';
@@ -12,15 +14,15 @@ import { User } from '@supabase/supabase-js';
 function Header() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const pathname = usePathname();
+  const dashboardPaths = ['/dashboard', '/tasks', '/assistant', '/settings'];
 
   useEffect(() => {
-    // Obtiene la sesión inicial
     supabaseClient.auth.getUser().then(({ data }) => {
       setUser(data.user);
       setLoading(false);
     });
 
-    // Escucha cambios en tiempo real (inicio/cierre de sesión)
     const { data: listener } = supabaseClient.auth.onAuthStateChange(
       (event, session) => {
         setUser(session?.user ?? null);
@@ -28,14 +30,18 @@ function Header() {
       }
     );
 
-    // Limpieza al desmontar
     return () => {
       listener.subscription.unsubscribe();
     };
   }, []);
 
   return (
-    <nav className="header z-10 w-full flex justify-between place-items-center py-4 px-6 font-black ">
+    <nav
+      className={clsx(
+        'header z-10 w-full flex justify-between place-items-center py-4 px-6 font-black ',
+        dashboardPaths.includes(pathname) ? 'hidden' : 'fixed'
+      )}
+    >
       <div className="nav-logo text-2xl">
         <Link href="/">SD</Link>
       </div>
@@ -53,7 +59,7 @@ function Header() {
           <a href="#">Linkedin</a>
         </li>
       </ul>
-      <div className=" flex justify-end">
+      <div className="flex justify-end">
         {user ? (
           <Avatar />
         ) : (
