@@ -1,17 +1,21 @@
 import GoogleLoginButton from '@/components/ui/GoogleLoginButton';
+import Image from 'next/image';
 export const metadata = {
   title: 'Login',
 };
 
 const page = () => {
   return (
-    <div className="card items-center bg-secondary w-1/2  px-4 py-6 rounded-lg shadow-lg shadow-accent text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <h1 className="font-bold text-3xl text-center mb-10">
-        SIGUE AL DASHBOARD
-      </h1>
-      <div className="flex flex-col justify-center mx-50">
+    <div>
+      <div className="card absolute bg-light gap-5 text-dark top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-10 py-5 rounded-lg  flex flex-col items-center justify-center">
+        <h2 className="text-tertiary">SamDashboard</h2>
+        <h1 className="text-2xl font-bold text-center ">
+          Continúa con google para ir al{' '}
+          <span className="text-tertiary">dashboard</span>.
+        </h1>
         <GoogleLoginButton />
       </div>
+      <Image src={'/bg.jpg'} alt="asd" fill className="-z-50" />
     </div>
   );
 };
