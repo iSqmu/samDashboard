@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { updateTask } from '@/actions/tasks';
 import { CreateTaskInput, Task } from '@/types/database.types';
 import { BsFillPencilFill } from 'react-icons/bs';
+import { useSweetAlert } from '@/hooks/UseSweetAlert';
 export default function EditTask({ task }: { task: Task }) {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,14 +18,12 @@ export default function EditTask({ task }: { task: Task }) {
     priority: task.priority!,
   });
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  const { Loading, ToastError, ToastSuccess } = useSweetAlert();
 
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -37,11 +36,27 @@ export default function EditTask({ task }: { task: Task }) {
 
     try {
       setLoading(true);
-      await updateTask(taskId, data).then(() => setLoading(false));
+      Loading.fire({
+        icon: 'info',
+        title: 'Actualizando tarea...',
+      });
+      await updateTask(taskId, data).then(() => {
+        setLoading(false);
+        Loading.close();
+        ToastSuccess.fire({
+          icon: 'success',
+          title: 'Tarea actualizada correctamente',
+        });
+      });
 
       setShowModal(false);
     } catch (err) {
-      alert('Error al crear tarea');
+      setLoading(false);
+      Loading.close();
+      ToastError.fire({
+        icon: 'error',
+        title: 'Error al actualizar tarea',
+      });
     }
   };
 
@@ -84,12 +99,16 @@ export default function EditTask({ task }: { task: Task }) {
             <textarea
               name="description"
               placeholder="Descripción"
-              value={formData.description}
+              value={
+                formData.description === null
+                  ? 'sin descripcion'
+                  : formData.description
+              }
               onChange={handleChange}
               className="w-full p-3 mb-4 border rounded outline-none focus:border-secondary transition-all duration-300"
             />
 
-            <div className="flex gap-4">
+            <div className="md:flex gap-4">
               <input
                 type="date"
                 name="due_date"

@@ -9,18 +9,25 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google/genai": "^1.37.0",
+    "@google/generative-ai": "^0.24.1",
     "@gsap/react": "^2.1.2",
+    "@nanostores/react": "git+https://github.com/ai/react.git",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.90.1",
+    "ai": "^6.0.37",
     "clsx": "^2.1.1",
     "framer-motion": "^12.24.12",
     "gsap": "^3.14.2",
     "lucide-react": "^0.562.0",
     "next": "16.1.1",
+    "openai": "^6.16.0",
+    "openai-edge": "^1.2.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
     "sweetalert2": "^11.26.17",
+    "sweetalert2-react-content": "^5.1.1",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {

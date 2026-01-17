@@ -5,7 +5,7 @@ import { FaPlus } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { createTask } from '@/actions/tasks';
 import { CreateTaskInput } from '@/types/database.types';
-
+import { useSweetAlert } from '@/hooks/UseSweetAlert';
 export default function NewTask() {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,10 +17,11 @@ export default function NewTask() {
     priority: 'low',
   });
 
+  const { Loading, ToastError, ToastSuccess } = useSweetAlert();
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -32,9 +33,18 @@ export default function NewTask() {
     }
 
     setLoading(true);
-
+    Loading.fire({
+      icon: 'info',
+      title: 'Creando tarea...',
+    });
     try {
-      await createTask(formData);
+      await createTask(formData).then(() => {
+        Loading.close();
+        ToastSuccess.fire({
+          icon: 'success',
+          title: 'Tarea creada correctamente',
+        });
+      });
       setLoading(false);
       setShowModal(false);
       setFormData({
@@ -45,7 +55,12 @@ export default function NewTask() {
         priority: 'low',
       });
     } catch (err) {
-      alert('Error al crear tarea');
+      setLoading(false);
+      Loading.close();
+      ToastError.fire({
+        icon: 'error',
+        title: 'Error al crear tarea',
+      });
     }
   };
 
@@ -53,10 +68,10 @@ export default function NewTask() {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="flex items-center gap-2 px-6 py-3 bg-secondary text-light rounded-lg hover:bg-tertiary transition cursor-pointer"
+        className="flex items-center gap-2 md:px-6 md:py-3 px-4 py-2 bg-secondary text-light rounded-lg hover:bg-tertiary transition cursor-pointer"
       >
         <FaPlus />
-        Añadir tarea
+        <span className="hidden md:flex">Añadir tarea</span>
       </button>
 
       {showModal && (
@@ -94,7 +109,7 @@ export default function NewTask() {
               className="w-full p-3 mb-4 border rounded outline-none focus:border-secondary transition-all duration-300"
             />
 
-            <div className="flex gap-4">
+            <div className="md:flex gap-4">
               <input
                 type="date"
                 name="due_date"

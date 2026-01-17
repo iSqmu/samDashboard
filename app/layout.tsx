@@ -17,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="bg-dark min-h-screen min-w-screen text-light overflow-x-hidden">
+      <body className="bg-dark min-h-screen min-w-screen text-light">
         <Header />
-        <main className="flex min-w-screen">{children}</main>
+        <main className="flex min-w-screen overflow-x-hidden">{children}</main>
       </body>
     </html>
   );

@@ -17,7 +17,7 @@ const Search = ({ placeholder }: { placeholder: string }) => {
     router.replace(`?${params.toString()}`, { scroll: false });
   }, [debouncedSearch, router]);
   return (
-    <div className="w-1/3 relative flex items-center shrink-0">
+    <div className="w-1/2 relative flex items-center shrink-0">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
@@ -29,7 +29,7 @@ const Search = ({ placeholder }: { placeholder: string }) => {
         className="w-full outline-0 border-secondary focus:border-b-2  focus:bg-light focus:text-dark pl-10 rounded-lg transition-all duration-300 ease-in-out"
         placeholder={placeholder}
       />
-      <FaMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+      <FaMagnifyingGlass className="absolute left-3 top-1/2  -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </div>
   );
 };

@@ -17,8 +17,8 @@ export default async function TasksPage({
   const tasks = searchTerm ? await searchTask(searchTerm) : await getTasks();
 
   return (
-    <div className="w-full h-full p-6">
-      <div className="flex justify-between items-center mb-8">
+    <div className="w-full h-full p-6 overflow-y-hidden overflow-x-hidden">
+      <div className="flex justify-start md:justify-between gap-5 items-center mb-8">
         <Search placeholder="Buscar tarea..." />
         <NewTaskClient />
       </div>
