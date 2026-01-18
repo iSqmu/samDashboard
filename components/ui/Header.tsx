@@ -49,19 +49,25 @@ function Header() {
       <ul className="flex gap-10 w-full justify-center">
         <li className="nav-link flex place-items-center gap-1">
           <FaGithub />
-          <a href="#" className="hidden md:flex">
+          <a
+            href="https://www.linkedin.com/in/samuel-g%C3%B3mez-81baa93a6/"
+            className="hidden md:flex"
+          >
             Github
           </a>
         </li>
         <li className="nav-link flex place-items-center gap-1">
           <FaInstagram />
-          <a href="#" className="hidden md:flex">
+          <a
+            href="https://www.instagram.com/sqmuu_/"
+            className="hidden md:flex"
+          >
             Instagram
           </a>
         </li>
         <li className="nav-link flex place-items-center gap-1">
           <FaLinkedin />
-          <a href="#" className="hidden md:flex">
+          <a href="https://github.com/iSqmu" className="hidden md:flex">
             Linkedin
           </a>
         </li>
