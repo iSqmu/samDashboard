@@ -2,11 +2,7 @@
 
 import { supabaseServer } from '@/lib/supabase/server';
 
-// Simple encryption/decryption using environment variable
-// In production, consider using a more robust encryption method
 function encryptApiKey(apiKey: string): string {
-  // For simplicity, we'll use base64 encoding
-  // In production, use proper encryption like AES-256
   return Buffer.from(apiKey).toString('base64');
 }
 
@@ -24,11 +20,9 @@ export async function saveUserApiKey(apiKey: string) {
     throw new Error('No autenticado');
   }
 
-  // Encrypt the API key before storing
+
   const encryptedKey = encryptApiKey(apiKey);
 
-  // Use Supabase client with service role for direct table access
-  // Or use RPC function if you prefer
   const { data, error } = await supabase
     .from('user_settings')
     .upsert(
@@ -71,7 +65,6 @@ export async function getUserApiKey(): Promise<string | null> {
     return null;
   }
 
-  // Decrypt the API key
   try {
     return decryptApiKey(data.gemini_api_key);
   } catch (e) {

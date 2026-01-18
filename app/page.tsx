@@ -8,6 +8,7 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { useGSAP } from '@gsap/react';
 import { GrFormNextLink } from 'react-icons/gr';
 import { FaAngleDown } from 'react-icons/fa';
+
 import {
   RiTailwindCssFill,
   RiReactjsFill,

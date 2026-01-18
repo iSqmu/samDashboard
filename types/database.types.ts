@@ -8,6 +8,7 @@ export interface Task {
   due_date?: string;
   due_hour?: string;
   created_at?: string;
+  updated_at?: string;
 }
 
 export interface CreateTaskInput {
@@ -16,6 +17,7 @@ export interface CreateTaskInput {
   priority: 'low' | 'medium' | 'high';
   due_date: string;
   due_hour: string;
+  updated_at?: string;
 }
 
 export interface NewTaskProps {

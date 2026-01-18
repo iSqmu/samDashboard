@@ -20,7 +20,7 @@ export async function proxy(request: NextRequest) {
           });
         },
       },
-    }
+    },
   );
 
   const {
@@ -45,5 +45,11 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/tasks/:path*', '/assistant/:path*', '/settings/:path*', '/auth'],
+  matcher: [
+    '/dashboard/:path*',
+    '/tasks/:path*',
+    '/assistant/:path*',
+    '/settings/:path*',
+    '/auth',
+  ],
 };

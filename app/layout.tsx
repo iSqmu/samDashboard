@@ -1,5 +1,4 @@
 import Header from '@/components/ui/Header';
-import Footer from '@/components/ui/Footer';
 import '@/styles/globals.css';
 import { Metadata } from 'next';
 
@@ -17,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="overflow-x-hidden">
-      <body className="bg-dark min-h-screen min-w-screen text-light" suppressHydrationWarning>
+      <body
+        className="bg-dark min-h-screen min-w-screen text-light"
+        suppressHydrationWarning
+      >
         <Header />
         <main className="flex min-w-screen overflow-x-hidden">{children}</main>
       </body>
