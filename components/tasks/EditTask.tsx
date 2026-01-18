@@ -15,7 +15,6 @@ export default function EditTask({ task }: { task: Task }) {
     description: task.description,
     due_date: task.due_date!,
     due_hour: task.due_hour!,
-    updated_at: Date.now().toString(),
     priority: task.priority!,
   });
 
@@ -26,7 +25,7 @@ export default function EditTask({ task }: { task: Task }) {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value, updated_at: Date.now().toString() });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (data: CreateTaskInput, taskId: string) => {
@@ -58,6 +57,7 @@ export default function EditTask({ task }: { task: Task }) {
         icon: 'error',
         title: 'Error al actualizar tarea',
       });
+      console.error('Error updating task:', err);
     }
   };
 

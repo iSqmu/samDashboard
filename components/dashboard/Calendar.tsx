@@ -2,7 +2,7 @@ import { IoLockClosed } from 'react-icons/io5';
 
 const Calendar = () => {
   return (
-    <div className="content justify-center items-center h-full hidden lg:flex">
+    <div className="content justify-center items-center h-full hidden lg:flex overflow-hidden">
       <div className="overflow-hidden w-1/2 h-auto mx-auto relative flex justify-center items-center rounded-lg">
         <img
           src="/calendarExample.jpg"

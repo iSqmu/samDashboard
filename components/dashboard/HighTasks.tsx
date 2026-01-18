@@ -5,7 +5,7 @@ const HighTasks = async () => {
   console.log(tasks);
 
   return (
-    <div className="card grid-rows-2 bg-light/20 border-light border-2 rounded-lg">
+    <div className="card grid-rows-2 bg-light/20 border-light border-2 rounded-lg overflow-hidden">
       <div className="title text-lg font-bold mb-4 h-1/3 w-full bg-light text-tertiary p-4 rounded-b-lg flex items-center">
         <h2>Tareas de prioridad Alta:</h2>
       </div>
