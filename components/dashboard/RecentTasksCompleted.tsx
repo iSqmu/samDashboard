@@ -1,22 +1,47 @@
-'use server';
-import React from 'react';
-import { getRecentTasksCompleted } from '@/actions/tasks';
+import { supabaseClient } from '@/lib/supabase/client';
+import { useEffect, useState } from 'react';
+import type { Task } from '@/types/database.types';
 
-const RecentTasksCompleted = async () => {
-  const tasks = await getRecentTasksCompleted();
+const TodayTasks = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const date = new Date();
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    const today = `${yyyy}-${mm}-${dd}`;
+
+    async function fetchTodayTasks() {
+      setLoading(true);
+
+      const { data, error } = await supabaseClient
+        .from('tasks')
+        .select('*')
+        .eq('completed', true)
+        .order('created_at', { ascending: false })
+        .limit(5);
+
+      if (error) throw error;
+
+      setTasks(data || []);
+      setLoading(false);
+    }
+
+    fetchTodayTasks();
+  }, []);
+
+  loading && <p>Cargando...</p>;
 
   return (
-    <div className="card grid-rows-2 bg-light/20 border-light border-2 rounded-lg overflow-hidden">
-      <div className="title text-lg font-bold mb-4 h-1/3 w-full bg-light text-tertiary p-4 rounded-b-lg flex items-center">
-        <h2>Tareas completadas recientemente:</h2>
-      </div>
-      <div className="content px-4">
-        <span className="text-5xl">
-          {tasks.length > 9 ? '+9' : tasks.length}
-        </span>
-      </div>
+    <div className="bg-gray-200 rounded-lg p-5 font-bold">
+      <h3 className="text-2xl">Completadas recientes:</h3>
+      <span className="block text-4xl text-green-500  mb-2">
+        {tasks.length}
+      </span>
     </div>
   );
 };
 
-export default RecentTasksCompleted;
+export default TodayTasks;

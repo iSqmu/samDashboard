@@ -3,7 +3,6 @@
 import { supabaseServer } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 import type { Task, CreateTaskInput } from '@/types/database.types';
-import { syncTaskToCalendar } from './calendar'; // Asegúrate de tener este archivo
 
 export async function getTodayTasks(): Promise<Task[]> {
   const supabase = await supabaseServer();
@@ -151,13 +150,6 @@ export async function createTask(task: CreateTaskInput) {
   if (error) throw error;
 
   const newTask = data[0] as Task;
-
-  try {
-    await syncTaskToCalendar(newTask);
-    console.log('Tarea sincronizada en Google Calendar:', newTask.title);
-  } catch (calendarError) {
-    console.error('Fallo al sincronizar con Calendar:', calendarError);
-  }
 
   revalidatePath('/tasks');
 
