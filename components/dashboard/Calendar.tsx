@@ -258,6 +258,26 @@ const Calendar = () => {
           )}
         </div>
       )}
+      <div className="mt-6 pt-4 border-t grid grid-cols-3 gap-4 text-center text-sm">
+        <div>
+          <div className="text-2xl font-bold text-green-600">
+            {Object.values(taskCountByDay).filter((d) => d.count > 0).length}
+          </div>
+          <div className="text-gray-600">Días activos</div>
+        </div>
+        <div>
+          <div className="text-2xl font-bold text-blue-600">
+            {maxTasksPerDay}
+          </div>
+          <div className="text-gray-600">Máx por día</div>
+        </div>
+        <div>
+          <div className="text-2xl font-bold text-purple-600">
+            {Math.round((tasks.length / daysInMonth) * 10) / 10}
+          </div>
+          <div className="text-gray-600">Promedio/día</div>
+        </div>
+      </div>
     </div>
   );
 };
