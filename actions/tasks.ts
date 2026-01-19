@@ -4,85 +4,6 @@ import { supabaseServer } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 import type { Task, CreateTaskInput } from '@/types/database.types';
 
-export async function getTodayTasks(): Promise<Task[]> {
-  const supabase = await supabaseServer();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) throw new Error('No autenticado');
-
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const dd = String(today.getDate()).padStart(2, '0');
-  const todayStr = `${yyyy}-${mm}-${dd}`;
-
-  const { data, error } = await supabase
-    .from('tasks')
-    .select('*')
-    .eq('user_id', user.id)
-    .eq('due_date', todayStr)
-    .order('due_hour', { ascending: true });
-
-  if (error) {
-    console.error('Error fetching today tasks:', error);
-    throw error;
-  }
-
-  return data as Task[];
-}
-
-export async function getRecentTasksCompleted(): Promise<Task[]> {
-  const supabase = await supabaseServer();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) throw new Error('No autenticado');
-
-  const { data, error } = await supabase
-    .from('tasks')
-    .select('*')
-    .eq('user_id', user.id)
-    .eq('completed', true)
-    .order('updated_at', { ascending: false })
-    .limit(5);
-
-  if (error) {
-    console.error('Error fetching recent completed tasks:', error);
-    throw error;
-  }
-
-  return data as Task[];
-}
-
-export async function getHighPriorityTasks(): Promise<Task[]> {
-  const supabase = await supabaseServer();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) throw new Error('No autenticado');
-
-  const { data, error } = await supabase
-    .from('tasks')
-    .select('*')
-    .eq('user_id', user.id)
-    .eq('priority', 'high')
-    .limit(10);
-
-  if (error) {
-    console.error('Error fetching high priority tasks:', error);
-    throw error;
-  }
-
-  return data as Task[];
-}
-
 export async function searchTask(param: string = ''): Promise<Task[]> {
   const supabase = await supabaseServer();
   const {
@@ -100,7 +21,7 @@ export async function searchTask(param: string = ''): Promise<Task[]> {
     .order('created_at', { ascending: false });
 
   if (param.trim()) {
-    query = query.or(`title.ilike.%${param}%,description.ilike.%${param}%`);
+    query = query.or(`title.ilike.%${param}%,description.ilike.%${param}%,priority.ilike.%${param}%`);
   }
 
   const { data, error } = await query;

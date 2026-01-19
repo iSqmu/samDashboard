@@ -13,7 +13,6 @@ export default async function TasksPage({
 
   const searchTerm = typeof params.search === 'string' ? params.search : '';
 
-  console.log(`${searchTerm} -> param`);
   const tasks = searchTerm ? await searchTask(searchTerm) : await getTasks();
 
   return (
@@ -22,7 +21,7 @@ export default async function TasksPage({
         <Search placeholder="Buscar tarea..." />
         <NewTaskClient />
       </div>
-      {tasks.length === 0 ? (
+      {tasks.length === 0 && searchTerm !== '' ? (
         <p>
           No se encontraron tareas con el término de búsqueda: '{searchTerm}'
         </p>
