@@ -63,7 +63,7 @@ export default function AssistantPage() {
         const errorData = await response.json().catch(() => ({}));
 
         throw new Error(
-          errorData.error || `Error ${response.status}: Failed to get response`
+          errorData.error || `Error ${response.status}: Failed to get response`,
         );
       }
 
@@ -99,7 +99,7 @@ export default function AssistantPage() {
   }
 
   return (
-    <div className="content flex flex-col h-full w-full">
+    <div className="content flex flex-col h-full w-full relative">
       {/* HEADER */}
       <div className="bg-tertiary px-5 py-4 w-full flex flex-col">
         <h2 className="text-2xl font-bold">SamAssistant</h2>
@@ -114,7 +114,7 @@ export default function AssistantPage() {
               exit={{ opacity: 0, x: -10 }}
               className={clsx(
                 'flex gap-3',
-                msg.role === 'user' ? 'justify-end' : 'justify-start'
+                msg.role === 'user' ? 'justify-end' : 'justify-start',
               )}
             >
               {msg.role === 'assistant' && (
@@ -127,7 +127,7 @@ export default function AssistantPage() {
                   'max-w-[70%] rounded-lg p-4',
                   msg.role === 'user'
                     ? 'bg-tertiary text-light'
-                    : 'bg-light text-dark'
+                    : 'bg-light text-dark',
                 )}
               >
                 <p>{msg.content}</p>
@@ -175,7 +175,7 @@ export default function AssistantPage() {
       <div ref={messagesEndRef} />
       <form
         onSubmit={handleSubmit}
-        className="bg-light border-t border-gray text-dark p-4"
+        className="bg-light fixed bottom-0 w-full md:relative border-t border-gray text-dark p-4"
       >
         <div className="flex gap-2">
           <input
