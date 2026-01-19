@@ -167,7 +167,7 @@ const Calendar = () => {
           {user?.user_metadata?.full_name.split(' ')[0]}
         </span>
       </h1>
-      <div className="stats hidden md:grid grid-cols-3 gap-5 mb-10 border-b-2 p-4 border-gray-400">
+      <div className="stats flex flex-col xl:grid grid-cols-3 gap-5 mb-10 border-b-2 p-4 border-gray-400">
         <TodayTasks />
         <RecentTasksCompleted />
         <HighTasks />
