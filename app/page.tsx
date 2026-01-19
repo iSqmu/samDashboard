@@ -174,10 +174,19 @@ export default function Home() {
         ref={imageRef}
         src="/asd.svg"
         alt="Imagen animada"
-        className="hidden lg:flex absolute -top-100 left-1/2 -translate-x-1/2 z-2 max-w-2xl drop-shadow-2xl drop-shadow-accent"
+        className="
+          absolute 
+          top-[-10%] hidden md:flex sm:top-[-5%] md:top-[-2%] lg:top-0
+          left-1/2 
+          -translate-x-1/2 
+          w-[85%] max-w-[90vw] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[45%]
+          -z-10
+          drop-shadow-2xl drop-shadow-accent
+          object-contain
+        "
       />
 
-      <div className="content mt-12 md:mt-20">
+      <div className="content mt-12 md:mt-20 -z-20">
         {/* Título principal - responsive */}
         <h1
           className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black text-center z-1 pt-20 md:pt-40 lg:pt-50 px-4"
