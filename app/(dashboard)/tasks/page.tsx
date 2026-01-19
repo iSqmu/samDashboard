@@ -21,6 +21,9 @@ export default async function TasksPage({
         <Search placeholder="Buscar tarea..." />
         <NewTaskClient />
       </div>
+      <p className="text-gray-400 my-4 px-4">
+        Haz click en la tarea para marcarla como completada/sin completar
+      </p>
       {tasks.length === 0 && searchTerm !== '' ? (
         <p>
           No se encontraron tareas con el término de búsqueda: '{searchTerm}'
