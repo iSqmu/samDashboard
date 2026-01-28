@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import type { Task, CreateTaskInput } from '@/types/database.types';
+import type { CreateTaskInput } from '@/types/database.types';
 import {
   getTasks,
   createTask,

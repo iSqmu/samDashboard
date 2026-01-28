@@ -2,7 +2,6 @@ import TaskList from '@/components/tasks/TaskList';
 import Search from '@/components/tasks/Search';
 import NewTaskClient from '@/components/tasks/NewTask';
 import { getTasks, searchTask } from '@/lib/actions/tasks';
-import { headers } from 'next/headers';
 
 export default async function TasksPage({
   searchParams,
