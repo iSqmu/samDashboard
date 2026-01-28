@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { chatWithGemini} from '@/lib/gemini';
-import { getUserApiKey } from '@/actions/userSettings';
+import { chatWithGemini } from '@/lib/gemini';
+import { getUserApiKey } from '@/lib/actions/userSettings';
 
 export async function POST(request: Request) {
   try {
@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
         { error: 'Messages array is required' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
           error:
             'GEMINI_API_KEY no está configurada. Por favor, agrega tu API key en la página de configuración.',
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -32,7 +32,6 @@ export async function POST(request: Request) {
       message: result.response,
       functionCalls: result.functionCalls,
     });
-    
   } catch (error: any) {
     console.error('Error in chat route:', error);
     const errorMessage =

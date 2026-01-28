@@ -7,20 +7,22 @@ const TodayTasks = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const date = new Date();
-    const dd = String(date.getDate()).padStart(2, '0');
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const yyyy = date.getFullYear();
-    const today = `${yyyy}-${mm}-${dd}`;
-
     async function fetchTodayTasks() {
       setLoading(true);
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+
+      const todayEnd = new Date();
+      todayEnd.setHours(23, 59, 59, 999);
 
       const { data, error } = await supabaseClient
         .from('tasks')
         .select('*')
-        .eq('due_date', today)
+        .gte('deadline', todayStart.toISOString())
+        .lte('deadline', todayEnd.toISOString())
         .eq('completed', false);
+
+        console.log(data)
 
       if (error) throw error;
 

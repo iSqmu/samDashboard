@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { createTask } from '@/actions/tasks';
+import { createTask } from '@/lib/actions/tasks';
 import { CreateTaskInput } from '@/types/database.types';
 import { useSweetAlert } from '@/hooks/UseSweetAlert';
 export default function NewTask() {
@@ -12,8 +12,7 @@ export default function NewTask() {
   const [formData, setFormData] = useState<CreateTaskInput>({
     title: '',
     description: '',
-    due_date: '',
-    due_hour: '',
+    deadline: '',
     priority: 'low',
   });
 
@@ -27,7 +26,7 @@ export default function NewTask() {
   };
 
   const handleSubmit = async () => {
-    if (!formData.title || !formData.due_date || !formData.due_hour) {
+    if (!formData.title || !formData.deadline) {
       alert('Completa los campos requeridos');
       return;
     }
@@ -50,8 +49,7 @@ export default function NewTask() {
       setFormData({
         title: '',
         description: '',
-        due_date: '',
-        due_hour: '',
+        deadline: '',
         priority: 'low',
       });
     } catch (err) {
@@ -111,17 +109,9 @@ export default function NewTask() {
 
             <div className="md:flex gap-4">
               <input
-                type="date"
-                name="due_date"
-                value={formData.due_date}
-                onChange={handleChange}
-                className="w-full p-3 mb-4 border rounded outline-none focus:border-secondary transition-all duration-300"
-              />
-
-              <input
-                type="time"
-                name="due_hour"
-                value={formData.due_hour}
+                type="datetime-local"
+                name="deadline"
+                // value={formData.deadline}
                 onChange={handleChange}
                 className="w-full p-3 mb-4 border rounded outline-none focus:border-secondary transition-all duration-300"
               />

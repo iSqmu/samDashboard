@@ -43,8 +43,8 @@ export default function TaskList({ initialTasks }: { initialTasks: Task[] }) {
                   <div className="info w-2/5 opacity-100 lg:opacity-0 transition-all duration-300">
                     <p>
                       <span className="hidden md:flex font-bold">Fecha:</span>{' '}
-                      {task.due_date} {' > '}
-                      {task.due_hour}
+                      {task.deadline?.split('T')[0]} a las{' '}
+                      {task.deadline?.split('T')[1].split('+')[0]}
                     </p>
                     <p>
                       <span className="hidden md:flex font-bold">
@@ -156,8 +156,8 @@ export default function TaskList({ initialTasks }: { initialTasks: Task[] }) {
                   <div className="info w-2/5 opacity-100 lg:opacity-0 transition-all duration-300">
                     <p>
                       <span className="hidden md:flex font-bold">Fecha:</span>{' '}
-                      {task.due_date} {' > '}
-                      {task.due_hour}
+                      {task.deadline?.split('T')[0]} a las{' '}
+                      {task.deadline?.split('T')[1].split('+')[0]}
                     </p>
                     <p>
                       <span className="hidden md:flex font-bold">

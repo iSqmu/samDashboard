@@ -5,7 +5,7 @@ import {
   saveUserApiKey,
   getUserApiKey,
   deleteUserApiKey,
-} from '@/actions/userSettings';
+} from '@/lib/actions/userSettings';
 import { useSweetAlert } from '@/hooks/UseSweetAlert';
 import { Key, Eye, EyeOff, Trash2, Save } from 'lucide-react';
 

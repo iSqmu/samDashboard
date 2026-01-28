@@ -6,7 +6,7 @@ import {
   updateTask,
   deleteTask,
   toggleComplete,
-} from '@/actions/tasks';
+} from '@/lib/actions/tasks';
 
 export const taskFunctions = [
   {
@@ -195,11 +195,11 @@ async function executeFunction(functionName: string, args: any) {
 
 export async function chatWithGemini(
   messages: Array<{ role: 'user' | 'assistant'; content: string }>,
-  apiKey?: string | null
+  apiKey?: string | null,
 ) {
   if (!apiKey) {
     throw new Error(
-      'El api key de Gemini no está configurado, por favor, agrega tu API key en el panel de configuración.'
+      'El api key de Gemini no está configurado, por favor, agrega tu API key en el panel de configuración.',
     );
   }
 
@@ -352,25 +352,25 @@ Usa las funciones SOLO cuando el usuario quiera realizar acciones CRUD en las ta
 
     if (err.message?.includes('API_KEY')) {
       throw new Error(
-        'API key inválida. Por favor, verifica tu API key en el panel de configuración'
+        'API key inválida. Por favor, verifica tu API key en el panel de configuración',
       );
     }
 
     if (err.message?.includes('quota') || err.message?.includes('limit')) {
       throw new Error(
-        'Se ha excedido el límite de peticiones. Por favor, intenta de nuevo más tarde.'
+        'Se ha excedido el límite de peticiones. Por favor, intenta de nuevo más tarde.',
       );
     }
 
     if (err.message?.includes('permission') || err.message?.includes('403')) {
       throw new Error(
-        'No tienes permisos para usar esta API. Por favor verifica tu API key.'
+        'No tienes permisos para usar esta API. Por favor verifica tu API key.',
       );
     }
 
     throw new Error(
       err.message ||
-        'Error al comunicarse con la API de Gemini. Por favor, intenta de nuevo.'
+        'Error al comunicarse con la API de Gemini. Por favor, intenta de nuevo.',
     );
   }
 }

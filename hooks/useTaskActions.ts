@@ -7,7 +7,7 @@ import {
   updateTask,
   deleteTask,
   toggleComplete,
-} from '@/actions/tasks';
+} from '@/lib/actions/tasks';
 import type { CreateTaskInput, Task } from '@/types/database.types';
 
 export function useTaskActions() {

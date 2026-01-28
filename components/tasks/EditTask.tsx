@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { updateTask } from '@/actions/tasks';
+import { updateTask } from '@/lib/actions/tasks';
 import { CreateTaskInput, Task } from '@/types/database.types';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { useSweetAlert } from '@/hooks/UseSweetAlert';
@@ -13,8 +13,7 @@ export default function EditTask({ task }: { task: Task }) {
   const [formData, setFormData] = useState<CreateTaskInput>({
     title: task.title,
     description: task.description,
-    due_date: task.due_date!,
-    due_hour: task.due_hour!,
+    deadline: task.deadline!,
     priority: task.priority!,
   });
 
@@ -29,7 +28,7 @@ export default function EditTask({ task }: { task: Task }) {
   };
 
   const handleSubmit = async (data: CreateTaskInput, taskId: string) => {
-    if (!formData.title || !formData.due_date || !formData.due_hour) {
+    if (!formData.title || !formData.deadline) {
       alert('Completa los campos requeridos');
       return;
     }
@@ -64,7 +63,7 @@ export default function EditTask({ task }: { task: Task }) {
   return (
     <>
       <button
-        onClick={(e) => setShowModal(true)}
+        onClick={() => setShowModal(true)}
         className="flex items-center gap-2 text-secondary opacity-60 hover:opacity-100 transition cursor-pointer"
       >
         <BsFillPencilFill />
@@ -111,17 +110,9 @@ export default function EditTask({ task }: { task: Task }) {
 
             <div className="md:flex gap-4">
               <input
-                type="date"
-                name="due_date"
-                value={formData.due_date}
-                onChange={handleChange}
-                className="w-full p-3 mb-4 border rounded outline-none focus:border-secondary transition-all duration-300"
-              />
-
-              <input
-                type="time"
-                name="due_hour"
-                value={formData.due_hour}
+                type="datetime-local"
+                name="deadline"
+                value={formData.deadline}
                 onChange={handleChange}
                 className="w-full p-3 mb-4 border rounded outline-none focus:border-secondary transition-all duration-300"
               />

@@ -50,8 +50,8 @@ const Calendar = () => {
       const { data, error } = await supabaseClient
         .from('tasks')
         .select('*')
-        .gte('due_date', firstDay.toISOString())
-        .lte('due_date', lastDay.toISOString());
+        .gte('deadline', firstDay.toISOString())
+        .lte('deadline', lastDay.toISOString());
 
       if (error) throw error;
 
@@ -66,9 +66,9 @@ const Calendar = () => {
     const counts: { [day: number]: { count: number; tasks: Task[] } } = {};
 
     tasks.forEach((task) => {
-      if (task.due_date) {
-        const dueDate = new Date(task.due_date);
-        const day = dueDate.getDate() + 1;
+      if (task.deadline) {
+        const dueDate = new Date(task.deadline);
+        const day = dueDate.getDate();
 
         if (!counts[day]) {
           counts[day] = { count: 0, tasks: [] };
@@ -216,7 +216,7 @@ const Calendar = () => {
                 <div
                   className="task flex w-full items-center justify-between bg-gray-200 p-4 rounded-lg mb-4 cursor-pointer"
                   key={task.id}
-                  title={task.due_hour}
+                  title={task.deadline?.split('T')[1].split('+')[0]}
                 >
                   <div className="head flex justify-center items-center mr-4">
                     <span>
